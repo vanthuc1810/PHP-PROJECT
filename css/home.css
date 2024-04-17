@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+::placeholder {
+    color: rgba(0, 0, 0, 0.5) !important; /* Màu chữ *
+    padding-left: 5px; /* Padding */
+  }
+*
+{
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.bi-chevron-compact-down
+{
+    font-size: 14px;
+    font-weight:800;
+    transition: 0.2s ease;
+}
+
+.heading-department
+{
+    background-color: #7fad39;
+    cursor: pointer;
+}
+.menu
+{
+    color: #000;
+}
+.form-control
+{
+    border: #ccc solid 1px;
+}
+.form-control:focus
+{
+    box-shadow: none;
+    border-color: #ccc;
+}
+
+.bg-customcolor
+{
+    background-color: #7fad39;
+    color: #fff;
+}
+.color-green
+{
+    color: #7fad39 ;
+}
+.btn:hover
+{
+    background-color: #7fad39;
+}
+.w-100
+{
+    width: 100%;
+}
+
+.slider-item
+{
+    padding-top: 66%;
+    background-image: url('/img/pc5.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.slider-content
+{
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(50%);
+}
+.lt-space-4
+{
+    letter-spacing: 4px;
+}
+.bg-grey
+{
+    background-color: #ccc;
+    opacity: 0.3;
+}
+.menu
+{
+    top: 100%;
+    display: none;
+    transition: display 5s ease;
+    background-color: #fff;
+    z-index: 1;
+}
+
+.menu-item-img
+{
+    position: relative;
+}
+.btn:hover
+{
+    color: #fff;
+}
+.text-heading::after
+{
+    display: block;
+    background-color: #7fad39;
+    height: 4px;
+    width: 5%;
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+}
+.list-unstyled > li
+{
+    position: relative;
+}
+.featured-item
+{
+    cursor: pointer;
+}
+.list-feature > li::after
+{
+    display: block;
+    background-color: #7fad39;
+    height: 2px;
+    width: 100%;
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 4px;
+    opacity: 0;
+}
+.featured-item:focus::after
+{
+    display: block;
+}
+.p-relative
+{
+    position: relative;
+}
+.hidden
+{
+    overflow: hidden;
+}
+.action-block
+{
+   position: absolute;
+   width: 60%;
+   bottom: -3rem;
+   transition: 0.3s ease;
+}
+.action-block li
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 2rem;
+    aspect-ratio: 1/1;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+}
+.action-block li:hover
+{
+    background-color: #7fad39;
+    color: #fff;
+}
+.item-hover:hover .action-block 
+{
+    bottom: 6rem;
+}
+.active::after
+{
+    opacity: 1 !important;
+}
+.active
+{
+    display: block;
+}
+.color-gray
+{
+    color: #b2b2b2;
+}
+.carousel-item
+{
+    transition: all 1s ease;
+}
+.layer-btn
+{
+    z-index: 5;
+}
+body
+{
+    background-color:rgba(0, 0, 0, 0.06);
+}
+.container
+{
+    background-color: #fff;
+    margin-top: 1rem;
+}
+.cus-boder-none
+{
+    border: none;
+}
+.card-img
+{
+    display: flex;
+    justify-content: center;
+}
+.card-img .img-fluid
+{
+    display: block;
+    border-radius: 16px;
+}
+.card-img-overlay
+{
+    top: unset;
+}
+.carousel-control-prev,
+.carousel-control-next
+{
+    width: unset;
+}
+.carousel-control-next-icon,
+.carousel-control-prev-icon
+{
+    background-image: unset;
+}
+@media (max-width: 767px) {
+    .carousel-inner .carousel-item > div {
+        display: none;
+    }
+    .carousel-inner .carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+.carousel-inner .carousel-item.active,
+.carousel-inner .carousel-item-next,
+.carousel-inner .carousel-item-prev {
+    display: flex;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+    
+    .carousel-inner .carousel-item-end.active,
+    .carousel-inner .carousel-item-next {
+      transform: translateX(25%);
+    }
+    
+    .carousel-inner .carousel-item-start.active, 
+    .carousel-inner .carousel-item-prev {
+      transform: translateX(-25%);
+    }
+}
+
+.carousel-inner .carousel-item-end,
+.carousel-inner .carousel-item-start { 
+  transform: translateX(0);
+}

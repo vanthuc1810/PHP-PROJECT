@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bower-npm-resolver": "^0.10.0",
+    "flatpickr": "^4.6.13"
+  }
+}
