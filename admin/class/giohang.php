@@ -27,7 +27,15 @@ class giohang {
         }
         return $result;
     }
-   
+    
+    public function delete_product($product_id)
+    {
+        $query = "DELETE FROM tbl_chitiet_giohang WHERE product_id = '$product_id'";
+        $result = $this -> db -> delete($query);
+        header("Refresh:0");
+        return $result;
+    }
+
     public function show_best_discount()
     {
         $query = "SELECT * FROM tbl_product ORDER BY product_discount DESC LIMIT 3";
@@ -41,7 +49,7 @@ class giohang {
     // }   
     public function show_number($user_id)
     {
-        $query = "SELECT COUNT(*) AS 'number' FROM tbl_chitiet_giohang";
+        $query = "SELECT COUNT(*) AS 'number' FROM tbl_chitiet_giohang WHERE user_id = '$user_id'";
         $result = $this -> db -> select($query);
         return $result;
     }

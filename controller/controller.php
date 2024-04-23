@@ -64,7 +64,15 @@ if (isset($_GET['view'])) {
             include_once('admin/promote/promote_edit.php');
             break;  
         case 'giohang':
-            include_once('admin/giohang/giohang.php');
+            if(isset($_SESSION['user_id']))
+            {
+                include_once('admin/giohang/giohang.php');
+            }else
+            {
+                include_once('view/sign-in.php');
+            }
+            break;
+        case 'thanhtoan':
             break;
         default:
             include_once('view/home.php');
