@@ -35,8 +35,6 @@ $product = new product;
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
     </section>
 </body>
 </html>

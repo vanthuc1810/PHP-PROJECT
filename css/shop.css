@@ -78,5 +78,5 @@ body
 }
 .bg-green-cus
 {
-    background-color: #7fad39;
-}
+    background-color: #7fad39 !important;
+} 

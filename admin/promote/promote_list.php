@@ -37,8 +37,8 @@ $show_promote = $promote -> show_promote();
             ?>
         </td>
         <td>
-            <a href="cartegory_delete.php?cartegory_id=" class="link-danger px-2">Xóa</a>
-            <a href="cartegory_edit.php?cartegory_id=" class="link-primary px-2">Sửa</a>
+            <a href="?view=promote_delete&promote_id=<?php echo $result['promote_id'] ?>" class="link-danger px-2">Xóa</a>
+            <a href="?view=promote_edit&promote_id=<?php echo $result['promote_id'] ?>" class="link-primary px-2">Sửa</a>
         </td>
     </tr>    
   </tbody>

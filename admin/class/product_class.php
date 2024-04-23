@@ -41,6 +41,11 @@ class product {
         $result = $this -> db -> select($query);
         return $result;
     }
+    public function show_promote($product_id){
+        $query = "SELECT * FROM tbl_promote INNER JOIN tbl_chitiet_khuyenmai ON tbl_promote.promote_id = tbl_chitiet_khuyenmai.promote_id WHERE product_id = '$product_id'";
+        $result = $this -> db -> select($query);
+        return $result;
+    }
     public function show_productById($cartegory_id, $value)
     {
         $query = "SELECT * FROM tbl_product WHERE cartegory_id = '$cartegory_id' ORDER BY product_name LIMIT $value";
@@ -55,6 +60,12 @@ class product {
     public function get_product($product_id)
     {
         $query = "SELECT * FROM tbl_product WHERE product_id = '$product_id'";
+        $result = $this -> db -> select($query);
+        return $result;
+    }
+    public function get_promote($product_id)
+    {
+        $query = "SELECT * FROM tbl_product INNER JOIN tbl_chitiet_khuyenmai INNER JOIN tbl_promote ON tbl_product.product_id = tbl_chitiet_khuyenmai.product_id WHERE tbl_product.product_id = '$product_id'";
         $result = $this -> db -> select($query);
         return $result;
     }

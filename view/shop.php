@@ -2,7 +2,7 @@
 $cartegory = new cartegory();
 $product = new product();
 ?>
-<section>
+<section style="margin-top: 140px;">
     <div id="carouselExampleSlidesOnly" class="carousel slide z-index-5" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">

@@ -2,7 +2,7 @@
 $cartegory = new cartegory();
 $show_cartegory = $cartegory->show_cartegory();
 ?>
-<section>
+<section style="margin-top: 140px;">
     <div class="container">
         <div class="row">
             <div class="col col-4"></div>

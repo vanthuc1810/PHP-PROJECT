@@ -1,8 +1,4 @@
-<?php
-include "../header.php";
-include "../slider.php";
-include "../class/product_class.php";
-?>
+
 <?php 
 $product = new product;
 $show_cartegory = $product -> show_cartegory();
@@ -27,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
     $product = $product -> update_product($product_id,$_POST,$_FILES);
 }
 ?>
-<div class="col-8 admin-content-right">
+<div class="col-8 admin-content-right"> 
                 <h4>Sửa thông tin sản phẩm</h4>
                 <div class="admin-content-right-cartegory flex-column w-100 d-flex align-items-center ">
                     <form action="" method="POST" enctype="multipart/form-data" class="d-flex gap-4 flex-column w-75">

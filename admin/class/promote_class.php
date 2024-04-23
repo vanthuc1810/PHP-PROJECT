@@ -22,7 +22,9 @@ class promote {
 
     public function product_add_promote($product_id_list,$promote)
     {
-        $query = "UPDATE tbl_product SET promote_id = '$promote' WHERE product_id IN($product_id_list)";
+        $query = "INSERT INTO tbl_chitiet_khuyenmai (product_id,promote_id)
+        VALUES ('$product_id_list', '$promote')
+        ON DUPLICATE KEY UPDATE promote_id = '$promote'";
         $result = $this -> db -> update($query);
         header('Location:?view=admin_promote_addToProduct');
         return $result;
@@ -31,7 +33,7 @@ class promote {
 
 
     public function show_promote(){
-        $query = "SELECT * FROM tbl_promote ORDER BY promote_id DESC";
+        $query = "SELECT * FROM tbl_promote";
         $result = $this -> db -> select($query);
         return $result;
     }
@@ -65,11 +67,11 @@ class promote {
         header('Location:product_list.php');
         return $result;
     }
-    public function delete_product($product_id)
+    public function delete_promote($promote_id)
     {
-        $query = "DELETE FROM tbl_product WHERE product_id = '$product_id'";
+        $query = "DELETE FROM tbl_promote WHERE promote_id = '$promote_id'";
         $result = $this -> db ->delete($query);
-        header('Location:product_list.php');
+        header('Location:?view=promote_list');
         return $result;
     }
 }

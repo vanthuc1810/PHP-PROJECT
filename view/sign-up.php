@@ -1,4 +1,4 @@
-<section>
+<section style="margin-top: 140px;">
     <div class="container p-5 mt-5">
         <div class="row d-flex justify-content-around ">
             <form action="../controller/sign_up_control.php" class="col-md-6" method="POST">

@@ -21,24 +21,20 @@ if (isset($_POST['value'])) {
 ?>
 
 <div class="col-8 p-4">
-    <div class="row align-items-center pb-4 justify-content-between">
-
-    </div>
 
     <!-- Danh sach sp -->
     <?php
     if (isset($_POST['product_id_active'])) {
-        $product_id_active = $_POST['product_id_active'];
-        $product_id_list = "";
-        foreach ($product_id_active as $value) {
-            $product_id_list .= $value . ',';
+        $product_id_list = $_POST['product_id_active'];
+        foreach($product_id_list as $product_id)
+        {
+            $promote = new promote();
+            
+            $promote = $promote->product_add_promote($product_id, $_POST['promote_id']);
         }
-        $product_id_list = substr($product_id_list, 0, -1);
-        $promote = new promote();
-        $promote = $promote->product_add_promote($product_id_list, $_POST['promote_id']);
     }
     ?>
-    <form action="" method="POST" class="row admin-content-right d-flex flex-wrap py-4">
+    <form action="" method="POST" class="row admin-content-right d-flex flex-wrap">
         <div class="row"> 
             <div class="col-4 py-4">
                 <div class="form-floating">

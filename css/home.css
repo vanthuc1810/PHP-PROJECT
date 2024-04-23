@@ -186,7 +186,7 @@
 }
 .carousel-item
 {
-    transition: all 1s ease;
+    transition: all 1s ease !important ;
 }
 .layer-btn
 {

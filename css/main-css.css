@@ -30,12 +30,6 @@
     display: contents;
     font-size: 20px;
 }
-.nav-item:hover .nav-link
-{
-
-    color: #7fad39;
-    transition: 0.3s;
-}
 
 /* person*/
 .account

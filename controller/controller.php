@@ -56,7 +56,16 @@ if (isset($_GET['view'])) {
             break;      
         case 'product':
             include_once('view/product.php');
-            break;             
+            break;  
+        case 'promote_delete':
+            include_once('admin/promote/promote_delete.php');
+            break;
+        case 'promote_edit':
+            include_once('admin/promote/promote_edit.php');
+            break;  
+        case 'giohang':
+            include_once('admin/giohang/giohang.php');
+            break;
         default:
             include_once('view/home.php');
             break;

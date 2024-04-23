@@ -1,88 +1,102 @@
 <?php
 $product = new product();
-if(!isset($_GET['product_id']) || $_GET['product_id'] == NULL)
-    {
-        echo "<script>window.location = 'index.php'</script>";
-    }else {
-        $product_id = $_GET['product_id'];
-    }
-$show_product = $product -> get_product($product_id);
-$result = $show_product -> fetch_assoc();
+if (!isset($_GET['product_id']) || $_GET['product_id'] == NULL) {
+    echo "<script>window.location = 'index.php'</script>";
+} else {
+    $product_id = $_GET['product_id'];
+}
+$show_product = $product->get_product($product_id);
+$result = $show_product->fetch_assoc();
+
+
+// show promote
+
+$show_promote = $product -> get_promote($product_id);
+if($show_promote)
+{
+    $show_promote = $show_promote -> fetch_assoc();
+}
+// xu ly them gio hang
+if($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    $giohang = new giohang();
+    $giohang = $giohang -> insert_product($_POST,$_SESSION);
+}
 ?>
-<section>
+<section style="margin-top: 140px;">
     <div class="container py-5">
-        <div class="row">
-            <div class="col col-8 d-flex justify-content-center">
-                <div class="product_img" style="width: 600px; height: 600px;">
-                    <img src="admin/uploads/<?php echo $result['product_img']?>" alt="@">
+        <form action="" method="POST">
+            <div class="row">
+                <div class="col col-8 d-flex justify-content-center">
+                    <div class="product_img" style="width: 600px; height: 600px;">
+                        <img src="admin/uploads/<?php echo $result['product_img'] ?>" alt="@">
+                    </div>
+                </div>
+                <div class="col col-4 d-flex flex-column position-relative">
+                    <h2 class="fw-bold fs-5"><?php echo $result['product_name'] ?>
+                    </h2>
+                    <span class="rate color-orange">5.0 <i class="bi bi-star-fill"></i></span>
+                    <div class="row py-4">
+                        <div class="col-4 fw-normal fs-6 color-gray">
+                            Giá bán lẻ
+                        </div>
+                        <div class="col-8 fs-6 text-danger fw-normal">
+                            <?php echo '$' . $result['product_price'] * (1 - $result['product_discount'] / 100) ?>
+
+                            <span class="sale-item-discount fs-6 color-gray text-decoration-line-through">
+                                <?php echo '$' . $result['product_price'] ?>
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="row py-4">
+                        <div class="col-4 fw-normal fs-6 color-gray">
+                            Tình trạng
+                        </div>
+                        <div class="col-8 fw-normal fs-6">
+                            <?php echo ($result['product_price'] > 0) ? 'Còn hàng' : 'Hết hàng' ?>
+                        </div>
+                    </div>  
+                    <div class="row py-4">
+                        <div class="col-4 fw-normal fs-6 color-gray">
+                            Khuyến mại
+                        </div>
+                        <div class="col-8 fw-normal fs-6 text-danger">
+                            <?php echo ($show_promote)?$show_promote['promote_name'] : ''; ?>
+                        </div>
+                    </div>
+                    <div class="row py-4">
+                        <div class="col-4 fw-normal fs-6 color-gray">
+                            Số lượng
+                        </div>
+                        <div class="col-8 fw-normal fs-6 buy-amount">
+                            <button class="dec fw-bold fs-6 px-1 border-0 bg-light" style="width: 25px; height:25px;" onclick="handleMinus()" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+                                </svg>
+                            </button>
+                            <input type="text" id="amount" name="amount" class="count-product border-0" style="outline: none;" value="1">
+                            <button class="inc fw-bold fs-6 px-1 border-0 bg-light" style="width: 25px; height:25px;" onclick="handlePlus()" type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <input type="hidden" name="product_id" value=<?php echo $result['product_id']?>>
+                    <div class="row pt-4 position-absolute action-btn gap-5">
+                        <button class="col-6 fw-normal fs-16 bg-danger text-light border-0 pr-2 py-2 fw-bold" type="submit">
+                            Thêm vào giỏ hàng
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+                        <button class="col-4 fw-normal fs-16 bg-danger text-light border-0 pl-2 py-2 fw-bold" type="submit">
+                            Mua ngay
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="col col-4 d-flex flex-column position-relative">
-                <h2 class="fw-bold fs-5"><?php echo $result['product_name'] ?>
-                </h2>
-                <span class="rate color-orange">5.0 <i class="bi bi-star-fill"></i></span>
-                <div class="row py-4">
-                    <div class="col-4 fw-normal fs-6 color-gray">
-                        Giá bán lẻ
-                    </div>
-                    <div class="col-8 fs-14 text-danger fw-normal">
-                    <?php echo '$'.$result['product_price']*(1-$result['product_discount']/100) ?>
+        </form>
 
-                        <span class="sale-item-discount fs-6 color-gray text-decoration-line-through">
-                            <?php echo '$'.$result['product_price']?>
-                        </span>
-                    </div>
-
-                </div>
-                <div class="row py-4">
-                    <div class="col-4 fw-normal fs-6 color-gray">
-                        Tình trạng
-                    </div>
-                    <div class="col-8 fw-normal fs-6">
-                        <?php echo ($result['product_price']>0) ? 'Còn hàng' : 'Hết hàng'?>
-                    </div>
-                </div>
-                <div class="row py-4">
-                    <div class="col-4 fw-normal fs-6 color-gray">
-                        Vận chuyển
-                    </div>
-                    <div class="col-8 fw-normal fs-6">
-                        Miễn phí giao hàng cho đơn từ 10$
-                    </div>
-                </div>
-                <div class="row py-4">
-                    <div class="col-4 fw-normal fs-6 color-gray">
-                        Khuyến mại
-                    </div>
-                    <div class="col-8 fw-normal fs-6 text-danger">
-                        <?php echo $result['product_promote']?>
-                    </div>
-                </div>
-                <div class="row py-4">
-                    <div class="col-4 fw-normal fs-6 color-gray">
-                        Số lượng
-                    </div>
-                    <div class="col-8 fw-normal fs-6 text-danger">
-                        <button class="dec fw-bold fs-6 px-1 border-0 bg-light">
-                            -
-                        </button>
-                        <input type="text" class="count-product border-0" placeholder="0">
-                        <button class="inc fw-bold fs-6 px-1 border-0 bg-light">
-                            +
-                        </button>
-                    </div>
-                </div>
-                <div class="row pt-4 position-absolute action-btn gap-5">
-                    <button class="col-6 fw-normal fs-16 bg-danger text-light border-0 pr-2 py-2 fw-bold">
-                        Thêm vào giỏ hàng
-                        <i class="bi bi-cart-plus"></i>
-                    </button>
-                    <button class="col-4 fw-normal fs-16 bg-danger text-light border-0 pl-2 py-2 fw-bold">
-                        Mua ngay
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 <section>
@@ -134,8 +148,37 @@ $result = $show_product -> fetch_assoc();
                 Mô tả sản phẩm
             </h3>
             <div class="col-8 custom-text-justify fw-normal review-product">
-                Hiện nay khi vấn đề thực phẩm bẩn đang được xã hội đặc biệt quan tâm thì trên thị trường đã xuất hiện nhiều thương hiệu tự hô hào là bán thực phẩm sạch, bán rau hữu cơ. Nhưng liệu rằng đây có phải là rau sạch, rau an toàn hay không? Để nhận biết được điều đó, chúng ta cần cập nhật những kiến thức, kỹ năng rau sạch, rau hữu cơ,.. Vậy rau sạch là gì? Rau hữu cơ là gì? Làm sao để phân biệt rau sạch và rau hữu cơ Hãy cùng EcoClean Việt Nam tìm hiểu qua bài viết dưới đây.
+                <?php echo $result['product_decs'] ?>
             </div>
         </div>
     </div>
 </section>
+
+
+<script>
+    let amountElement = document.getElementById('amount');
+    let amount = amountElement.value;
+
+    // ham render()
+    let render = (amount) => {
+        amountElement.value = amount;
+    }
+    // Xu ly handlePlus()
+    let handlePlus = () => {
+        amount++;
+        render(amount);
+    }
+    let handleMinus = () => {
+        if (amount > 1) {
+            amount--;
+            render(amount);
+        }
+    }
+    amountElement.addEventListener('input', () => {
+        amount = amountElement.value;
+        amount = parseInt(amount);
+        amount = (isNaN(amount) || amount == 0) ? 1 : amount;
+        console.log(amount);
+        render(amount);
+    });
+</script>
