@@ -18,15 +18,34 @@ $show_cartegory = $product -> show_cartegory();
         $result = $get_product -> fetch_assoc();
     }
 ?>
+<?php
+use Cloudinary\Configuration\Configuration;
+use Cloudinary\Api\Upload\UploadApi;
+use GuzzleHttp\Psr7\Request;
+
+Configuration::instance([
+    'cloud' => [
+      'cloud_name' => 'vanthuc', 
+      'api_key' => '143549995223456', 
+      'api_secret' => 'TtV28amUWGGl281c4ACPJASZPgM'],
+    'url' => [
+      'secure' => true]]);
+?>
 <?php 
 $product = new product;
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
-    $product = $product -> update_product($product_id,$_POST,$_FILES);
+    $tmp_path = $_FILES['product_img']['tmp_name'];
+    $uploadApi = new UploadApi();
+    $result =   $uploadApi -> upload($tmp_path);
+    $product = new product();
+    $product_img = $result['secure_url'];
+    $_POST['product_img'] = $product_img;
+    $product = $product -> update_product($product_id,$_POST);
 }
 ?>
 <div class="col-8 admin-content-right">
-                <h4>Sửa thông tin sản phẩm</h4>
+                <h4>Sửa thông tin sản phẩm <?php echo $result['product_id']; ?></h4>
                 <div class="admin-content-right-cartegory flex-column w-100 d-flex align-items-center ">
                     <form action="" method="POST" enctype="multipart/form-data" class="d-flex gap-4 flex-column w-75">
                     <select name="cartegory_id" class="py-2 px-1">

@@ -8,13 +8,12 @@ class product {
     public function insert_product()
     {
         $product_name = $_POST['product_name'];
-        $product_decs = $_POST['product_decs'];
         $product_discount = $_POST['product_discount'];
         $product_quantity = $_POST['product_quantity'];
-        move_uploaded_file($_FILES['product_img']['tmp_name'],'admin/uploads/'.$_FILES['product_img']['name']);
-        $product_img = $_FILES['product_img']['name'];
+        $product_img = $_POST['product_img'];
         $product_price = $_POST['product_price'];
         $cartegory_id = $_POST['cartegory_id'];
+        $product_decs = $_POST['product_decs'];
         $query = "INSERT INTO tbl_product (
             product_name,
             product_discount,
@@ -24,7 +23,7 @@ class product {
             cartegory_id,
             product_decs
         ) 
-        VALUES ('$product_name','$product_discount','$product_quantity','$product_img','$product_price','$cartegory_id', '$product_decs')";
+        VALUES ('$product_name','$product_discount','$product_quantity','$product_img','$product_price','$cartegory_id','$product_decs')";
         $result = $this -> db -> insert($query);
         header('Location:?view=admin_product_add');
         return $result;
@@ -78,8 +77,7 @@ class product {
         $product_decs = !empty($_POST['product_decs']) ? $_POST['product_decs'] : $result['product_decs'];
         $product_discount = !empty($_POST['product_discount']) ? $_POST['product_discount'] : $result['product_discount'];
         $product_quantity = !empty($_POST['product_quantity']) ? $_POST['product_quantity'] : $result['product_quantity'];
-        move_uploaded_file($_FILES['product_img']['tmp_name'],'../uploads/'.$_FILES['product_img']['name']);
-        $product_img = !empty($_FILES['product_img']['name']) ? $_FILES['product_img']['name'] : $result['product_img'];
+        $product_img = !empty($_POST['product_img']) ? $_POST['product_img'] : $result['product_img'];
         $product_price = !empty($_POST['product_price']) ? $_POST['product_price'] : $result['product_price'];
         $cartegory_id = !empty($_POST['cartegory_id']) ? $_POST['cartegory_id'] : $result['cartegory_id'];
         $query = "UPDATE tbl_product SET cartegory_id = '$cartegory_id', product_name = '$product_name', product_price = '$product_price', product_discount = '$product_discount', product_quantity = '$product_quantity', product_img = '$product_img', product_decs = '$product_decs'

@@ -53,7 +53,7 @@ if (isset($_POST['value'])) {
         ?>
                 <div class="col-md-3 d-flex flex-column px-2 py-2 flex-column p-relative hidden item-hover">
                     <a href="?view=product&product_id=<?php echo $result['product_id'] ?>">
-                        <img src="<?php echo 'admin/uploads/' . $result['product_img'] ?>" alt="" class="w-100 vh-20">
+                        <img src="<?php echo $result['product_img'] ?>" alt="" class="w-100 vh-20">
                     </a>
                     <div class="in4-product py-3 pb-1 text-center">
                         <h6><?php echo $result['product_name'] ?></h6>

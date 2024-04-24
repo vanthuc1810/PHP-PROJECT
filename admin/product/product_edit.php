@@ -1,4 +1,3 @@
-
 <?php 
 $product = new product;
 $show_cartegory = $product -> show_cartegory();
