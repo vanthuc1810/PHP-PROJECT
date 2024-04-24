@@ -28,3 +28,5 @@ class hoadon {
     }
 }
 ?>
+
+xinc hao tat ca cac ban
