@@ -4,6 +4,7 @@ include 'admin/class/user_class.php';
 include 'admin/class/product_class.php';
 include 'admin/class/promote_class.php';
 include 'admin/class/giohang.php';
+include 'admin/class/hoadon.php';
 include 'cloudinary/vendor/autoload.php';
 $cartegory = new cartegory();
 $user = new user();

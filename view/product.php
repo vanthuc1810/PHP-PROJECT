@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
             <div class="row">
                 <div class="col col-8 d-flex justify-content-center">
                     <div class="product_img" style="width: 600px; height: 600px;">
-                        <img src="admin/uploads/<?php echo $result['product_img'] ?>" alt="@">
+                        <img src="<?php echo $result['product_img'] ?>" alt="@" class="img-hover-scale">
                     </div>
                 </div>
                 <div class="col col-4 d-flex flex-column position-relative">

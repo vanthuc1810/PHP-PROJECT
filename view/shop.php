@@ -58,7 +58,7 @@ $product = new product();
                                     <div class="col-12 col-sm-6 col-md-4 align-items-center d-flex flex-column sale-item position-relative hidden item-hover">
                                                                                 <a href="?view=product&product_id=<?php echo $result['product_id'] ?>">
                                         <a href="?view=product&product_id=<?php echo $result['product_id'] ?>">
-                                        <img src="admin/uploads/<?php echo $result['product_img'] ?>" alt="" class="w-100">
+                                        <img src="<?php echo $result['product_img'] ?>" alt="" class="w-100">
                                         </a>
                                         <div class="in4-product py-3 pb-1 text-center">
                                             <h6><?php echo $result['product_name'] ?></h6>
@@ -108,7 +108,7 @@ $product = new product();
                             ?>
                                     <div class="col-12 col-sm-6 col-md-4 align-items-center d-flex flex-column p-relative hidden item-hover">
                                         <a href="?view=product&product_id=<?php echo $result['product_id'] ?>">
-                                            <img src="admin/uploads/<?php echo $result['product_img'] ?>" alt="" class="w-100">
+                                            <img src="<?php echo $result['product_img'] ?>" alt="" class="w-100">
                                         </a>
                                         <div class="in4-product py-3 pb-1 text-center">
                                             <h6><?php echo $result['product_name'] ?></h6>

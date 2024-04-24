@@ -87,9 +87,9 @@ $show_cartegory = $cartegory->show_cartegory();
                             while ($result = $show_cartegory->fetch_assoc()) {
                         ?>
                                 <li class="featured-item">
-                                    <a href="?cartegory_id=<?php echo $result['cartegory_id'] ?>" class="text-decoration-none text-dark" id= "featured-item-link">
+                                    <a href="?cartegory_id=<?php echo $result['cartegory_id'] ?>" class="text-decoration-none text-dark" id="featured-item-link">
                                         <?php echo $result['cartegory_name'] ?>
-                                    </a>                                    
+                                    </a>
                                 </li>
                         <?php
                             }
@@ -101,13 +101,12 @@ $show_cartegory = $cartegory->show_cartegory();
         </div>
         <?php
         $product = new product();
-        if(!isset($_GET['cartegory_id']))
-        {
+        if (!isset($_GET['cartegory_id'])) {
             $show_product = $product->show_product(12);
-        }else
-        { if ($_GET['cartegory_id'] == 0) {
-            $show_product = $product->show_product(12);
-        }else $show_product = $product->show_productById($_GET['cartegory_id'],12); 
+        } else {
+            if ($_GET['cartegory_id'] == 0) {
+                $show_product = $product->show_product(12);
+            } else $show_product = $product->show_productById($_GET['cartegory_id'], 12);
         }
         ?>
         <div class="row">
@@ -117,20 +116,21 @@ $show_cartegory = $cartegory->show_cartegory();
                     if ($show_product) {
                         while ($result = $show_product->fetch_assoc()) {
                     ?>
-                            <div class="col-12 col-sm-6 col-md-3 align-items-center d-flex flex-column p-relative hidden item-hover">
-                                <img src="admin/uploads/<?php echo $result['product_img'] ?>" alt="" class="w-100">
+                    <div class=" col-md-3 align-items-center d-flex flex-column p-relative hidden item-hover">
+                        <a href="?view=product&product_id=<?php echo $result['product_id'] ?>" class=" text-dark text-decoration-none">
+                                <img src="<?php echo $result['product_img'] ?>" alt="" class="w-100">
                                 <div class="in4-product py-3 pb-1 text-center">
                                     <h6><?php echo $result['product_name'] ?></h6>
-                                    <span class="fw-bold fs-5"><?php $price = $result['product_price'] * (1 - $result['product_discount'] / 100);
-                                                                echo '$' . $price ?></span>
+                                    <span class="fw-bold fs-5"><?php $price = $result['product_price'] * (1 - $result['product_discount'] / 100); echo '$' . $price ?></span>
                                 </div>
-                                <div class="action-block w-60 d-flex justify-content-around">
-                                    <li class="list-unstyled"><i class="fs-14 bi bi-suit-heart-fill"></i></li>
-                                    <li class="list-unstyled"><i class="fs-14 bi bi-arrow-clockwise"></i></li>
-                                    <li class="list-unstyled"><i class="fs-14 bi bi-cart-fill"></i></li>
-                                </div>
-                            </div>
-                    <?php
+                        </a>
+                        <div class="action-block w-60 d-flex justify-content-around">
+                            <li class="list-unstyled"><i class="fs-14 bi bi-suit-heart-fill"></i></li>
+                            <li class="list-unstyled"><i class="fs-14 bi bi-arrow-clockwise"></i></li>
+                            <li class="list-unstyled"><i class="fs-14 bi bi-cart-fill"></i></li>
+                        </div>
+                    </div>
+                <?php
                         }
                     }
                     ?>

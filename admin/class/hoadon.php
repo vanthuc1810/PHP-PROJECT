@@ -11,7 +11,7 @@ class hoadon {
         $user_id = intval($user_id);
         $query = "INSERT INTO tbl_hoadon (user_id) VALUES ($user_id)";
         $result = $this -> db -> insert($query);
-        $query = "SELECT * FROM tbl_hoadon WHERE user_id = '$user_id'";
+        $query = "SELECT * FROM tbl_hoadon WHERE user_id = '$user_id' ORDER BY hoadon_id DESC";
         $result = $this -> db -> select($query);
         $hoadon = $result -> fetch_assoc();
         $hoadon_id = $hoadon['hoadon_id'];
