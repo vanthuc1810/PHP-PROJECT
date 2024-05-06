@@ -35,12 +35,16 @@ Configuration::instance([
 $product = new product;
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
-    $tmp_path = $_FILES['product_img']['tmp_name'];
-    $uploadApi = new UploadApi();
-    $result =   $uploadApi -> upload($tmp_path);
-    $product = new product();
-    $product_img = $result['secure_url'];
-    $_POST['product_img'] = $product_img;
+    if(!isset($_FILES['product_img']))
+    {
+        $tmp_path = $_FILES['product_img']['tmp_name'];
+        $uploadApi = new UploadApi();
+        $result =   $uploadApi -> upload($tmp_path);
+        $product = new product();
+        $product_img = $result['secure_url'];
+        $_POST['product_img'] = $product_img;
+        echo 'helo';
+    }
     $product = $product -> update_product($product_id,$_POST);
 }
 ?>
@@ -110,7 +114,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
                             </div>
                         <div class="">
                             <label class="fs-6 fw-normal" for="imgInput">URL</label>
-                            <input name="product_img" type="file" class="form-control" id="imgInput" placeholder="<?php echo $result['product_img']?>">
+                            <input name="product_img" type="file" class="form-control" id="imgInput" placeholder="<?php echo $result['product_img']?>" value="<?php echo $result['product_img']?>">
                         </div>
                         <button class="btn btn-success" type="submit">ADD</button>
                     </form>

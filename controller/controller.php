@@ -69,6 +69,12 @@ if (isset($_GET['view'])) {
         case 'delete_giohang':
             include_once('admin/giohang/giohang_delete.php');
             break;
+        case 'admin_hoadon':
+            include_once('admin/hoadon/list_hoadon.php');
+            break;
+        case 'admin_chitiet_hoadon':
+            include_once('admin/hoadon/chitiet_hoadon.php');
+            break;
         default:
             include_once('view/home.php');
             break;

@@ -19,7 +19,7 @@ $show_cartegory = $product -> show_cartegory();
 $product = new product;
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
-    $product = $product -> update_product($product_id,$_POST,$_FILES);
+    $product = $product -> update_product($product_id,$_POST);
 }
 ?>
 <div class="col-8 admin-content-right"> 
@@ -88,7 +88,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
                             </div>
                         <div class="">
                             <label class="fs-6 fw-normal" for="imgInput">URL</label>
-                            <input name="product_img" type="file" class="form-control" id="imgInput" placeholder="<?php echo $result['product_img']?>">
+                            <input name="product_img" type="file" class="form-control" id="imgInput" placeholder="<?php echo $result['product_img']?> " value="<?php echo $result['product_img']?>">
                         </div>
                         <button class="btn btn-success" type="submit">ADD</button>
                     </form>

@@ -37,7 +37,7 @@ $show_cartegory = $cartegory->show_cartegory();
 
 <body>
     <!-- A grey horizontal navbar that becomes vertical on small screens -->
-    <div class="positio top-0" style="z-index: 99; left: 0; right:0">
+    <div class="position-fixed top-0" style="z-index: 99; left: 0; right:0">
         <header>
             <nav class="navbar navbar-expand-md bg-light ">
                 <div class="container-md">

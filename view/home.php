@@ -2,6 +2,28 @@
 $cartegory = new cartegory();
 $show_cartegory = $cartegory->show_cartegory();
 ?>
+<?php
+// Thêm API key của bạn ở đây
+
+// Xây dựng URL cho yêu cầu API
+$url = "https://newsdata.io/api/1/news?apikey=pub_43560cbec9b4b0b5795ecefab06d40381f155&q=news&country=vi";
+
+// Gửi yêu cầu API và nhận phản hồi
+$response = file_get_contents($url);
+
+// Xử lý phản hồi
+if ($response) {
+    $data = json_decode($response);
+} else {
+    // Không thể kết nối đến API
+    echo "Failed to connect to News API.";
+}
+?>
+
+<?php
+$results = $data->results;
+?>
+
 <section style="margin-top: 140px;">
     <div class="container">
         <div class="row">
@@ -116,21 +138,22 @@ $show_cartegory = $cartegory->show_cartegory();
                     if ($show_product) {
                         while ($result = $show_product->fetch_assoc()) {
                     ?>
-                    <div class=" col-md-3 align-items-center d-flex flex-column p-relative hidden item-hover">
-                        <a href="?view=product&product_id=<?php echo $result['product_id'] ?>" class=" text-dark text-decoration-none">
-                                <img src="<?php echo $result['product_img'] ?>" alt="" class="w-100">
-                                <div class="in4-product py-3 pb-1 text-center">
-                                    <h6><?php echo $result['product_name'] ?></h6>
-                                    <span class="fw-bold fs-5"><?php $price = $result['product_price'] * (1 - $result['product_discount'] / 100); echo '$' . $price ?></span>
+                            <div class=" col-md-3 align-items-center d-flex flex-column p-relative hidden item-hover">
+                                <a href="?view=product&product_id=<?php echo $result['product_id'] ?>" class=" text-dark text-decoration-none">
+                                    <img src="<?php echo $result['product_img'] ?>" alt="" class="w-100">
+                                    <div class="in4-product py-3 pb-1 text-center">
+                                        <h6><?php echo $result['product_name'] ?></h6>
+                                        <span class="fw-bold fs-5"><?php $price = $result['product_price'] * (1 - $result['product_discount'] / 100);
+                                                                    echo '$' . $price ?></span>
+                                    </div>
+                                </a>
+                                <div class="action-block w-60 d-flex justify-content-around">
+                                    <li class="list-unstyled"><i class="fs-14 bi bi-suit-heart-fill"></i></li>
+                                    <li class="list-unstyled"><i class="fs-14 bi bi-arrow-clockwise"></i></li>
+                                    <li class="list-unstyled"><i class="fs-14 bi bi-cart-fill"></i></li>
                                 </div>
-                        </a>
-                        <div class="action-block w-60 d-flex justify-content-around">
-                            <li class="list-unstyled"><i class="fs-14 bi bi-suit-heart-fill"></i></li>
-                            <li class="list-unstyled"><i class="fs-14 bi bi-arrow-clockwise"></i></li>
-                            <li class="list-unstyled"><i class="fs-14 bi bi-cart-fill"></i></li>
-                        </div>
-                    </div>
-                <?php
+                            </div>
+                    <?php
                         }
                     }
                     ?>
@@ -150,6 +173,9 @@ $show_cartegory = $cartegory->show_cartegory();
         </div>
     </div>
 </section>
+
+
+
 <section>
     <div class="container py-5">
         <div class="row justify-content-center align-items-center flex-column">
@@ -158,75 +184,39 @@ $show_cartegory = $cartegory->show_cartegory();
             </h3>
         </div>
         <div class="row pt-5">
-            <div class="col-4">
-                <img src="/img/blog-1.jpg.webp" alt="" class="w-100">
-                <div class="row py-3">
-                    <div class="col-6 fs-7 fw-normal color-gray">
-                        <i class="bi bi-calendar"></i>
-                        May 4, 2019
+            <?php
+            $index = 0;
+            foreach ($results as $result) {
+                $index++;
+                if ($index <= 3) {
+            ?>
+                    <div class="col-4">
+                        <a href="<?php echo $result -> link ?>" class="text-dark" style="text-decoration: none;">
+                            <img src="<?php echo $result->image_url ?>" alt="" class="w-100" style="height: 300px;">
+                            <div class="row py-3">
+                                <div class="col-6 fs-7 fw-normal color-gray">
+                                    <i class="bi bi-calendar"></i>
+                                    <?php echo $result->pubDate ?>
+                                </div>
+                                <div class="col-6 fs-7 fw-normal color-gray">
+                                    <i class="bi bi-chat"></i>
+                                    5
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="content-news-heading fs-5 fw-bold">
+                                    <?php echo $result->title ?>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                    <div class="col-6 fs-7 fw-normal color-gray">
-                        <i class="bi bi-chat"></i>
-                        5
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="content-heading fs-5 fw-bold">
-                        Cooking tips make cooking simple
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="content fs-6 fw-normal color-gray">
-                        Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <img src="/img/blog-2.jpg.webp" alt="" class="w-100">
-                <div class="row py-3">
-                    <div class="col-6 fs-7 fw-normal color-gray">
-                        <i class="bi bi-calendar"></i>
-                        May 4, 2019
-                    </div>
-                    <div class="col-6 fs-7 fw-normal color-gray">
-                        <i class="bi bi-chat"></i>
-                        5
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="content-heading fs-5 fw-bold">
-                        Cooking tips make cooking simple
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="content fs-6 fw-normal color-gray">
-                        Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <img src="/img/blog-3.jpg.webp" alt="" class="w-100">
-                <div class="row py-3">
-                    <div class="col-6 fs-7 fw-normal color-gray">
-                        <i class="bi bi-calendar"></i>
-                        May 4, 2019
-                    </div>
-                    <div class="col-6 fs-7 fw-normal color-gray">
-                        <i class="bi bi-chat"></i>
-                        5
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="content-heading fs-5 fw-bold">
-                        Cooking tips make cooking simple
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="content fs-6 fw-normal color-gray">
-                        Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat
-                    </div>
-                </div>
-            </div>
+
+            <?php
+                } else {
+                    break;
+                }
+            }
+            ?>
         </div>
     </div>
 </section>

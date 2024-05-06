@@ -9,23 +9,21 @@ if (isset($_GET)) {
 ?>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
+
 
     $list_id_selected = $_POST['input_selected'];
     $giohang = new $giohang();
-    $giohang = $giohang -> get_product_selected($list_id_selected);
+    $giohang = $giohang->get_product_selected($list_id_selected);
     $product_id_list = array();
-    if($giohang)
-    {
-        while($result = $giohang -> fetch_assoc())
-        {
+    if ($giohang) {
+        while ($result = $giohang->fetch_assoc()) {
             $id = $result['product_id'];
             $count = $result['count'];
             $product_id_list[$id] = $count;
         }
     }
     $hoadon = new hoadon();
-    $hoadon = $hoadon -> insert_hoadon($product_id_list);
+    $hoadon = $hoadon->insert_hoadon($product_id_list);
 }
 ?>
 <section style="margin-top: 140px;">
@@ -34,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-4">
                 Sản phẩm
             </div>
-            <div class="col-2">
+            <div class="col-2 text-start">
                 Đơn giá
             </div>
             <div class="col-2">
@@ -55,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ?>
                     <div class="row text-center py-4 align-items-center" style="border-bottom: 1px solid #ccc;">
                         <div class="col-4 text-start d-flex align-items-center">
-                            <input type="checkbox" name="input_selected[]" id=<?php echo $result['product_id']?> value="<?php echo $result['product_id']?>" style="width: 20px; height: 20px;">
+                            <input type="checkbox" name="input_selected[]" id=<?php echo $result['product_id'] ?> value="<?php echo $result['product_id'] ?>" style="width: 20px; height: 20px;">
                             <label for=<?php echo $result['product_id'] ?> class="mx-4 col-8 d-flex">
                                 <div class="product w-100 d-flex align-items-center gap-2" style="width: 100%;">
                                     <img src="<?php echo $result['product_img'] ?>" alt="" style="height: 100px; width: 100px;">
@@ -63,22 +61,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                             </label>
                         </div>
-                        <div class="col-2">
-                            <p class="fs-5 text-danger">
+                        <div class="col-2 text-start">
+                            <span class="fs-5 text-danger">
+                                <?php
+                                $chiphi += $result['product_price'] * (1 - $result['product_discount'] / 100);
+                                echo $result['product_price'] * (1 - $result['product_discount'] / 100) . '$';
+                                ?>
+                            </span>
+                            <span class="" style="text-decoration: line-through;">
                                 <?php
                                 echo $result['product_price'] . '$';
                                 ?>
-                                <span class="fs-5" style="text-decoration:line-through; color: #ccc;">
-                                    <?php
-                                    $chiphi += $result['product_price'] * (1 - $result['product_discount'] / 100);
-                                    echo $result['product_price'] * (1 - $result['product_discount'] / 100) . '$';
-                                    ?>
-                                </span>
-                            </p>
+                            </span>
+
                         </div>
                         <div class="col-2">
                             <p class="fs-5">
-                                <input type="hidden" name="count[]" value="<?php echo $result['count'];?>">
+                                <input type="hidden" name="count[]" value="<?php echo $result['count']; ?>">
                                 <?php
                                 echo $result['count'];
                                 ?>
@@ -108,16 +107,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <h1 class="modal-title fs-5" id="staticBackdropLabel">Organi thông báo!!</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body d-flex justify-content-around">
                             <p>Số tiền cần thanh toán là:
                                 <span class="text-danger">
                                     <?php echo $chiphi; ?>
                                 </span>
                             </p>
+                            <img src="testQR.php" alt="" style="width:100px; border-radius:0px;">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Xác nhận</button>
                         </div>
                     </div>
                 </div>

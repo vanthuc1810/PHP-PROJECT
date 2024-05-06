@@ -26,5 +26,26 @@ class hoadon {
         }
         return $result;
     }
+
+    public function show_hoadon()
+    {
+        $query = "SELECT * FROM `tbl_hoadon` INNER JOIN tbl_user ON tbl_hoadon.user_id = tbl_user.user_id";
+        $result = $this -> db -> select($query);
+        return $result;
+    }
+    public function show_hoadon_byId($hoadon_id)
+    {
+        $query = "SELECT * FROM `tbl_hoadon` INNER JOIN tbl_chitiet_hoadon ON tbl_hoadon.hoadon_id = tbl_chitiet_hoadon.hoadon_id INNER JOIN tbl_product ON tbl_chitiet_hoadon.product_id = tbl_product.product_id WHERE tbl_chitiet_hoadon.hoadon_id = $hoadon_id";
+        $result = $this -> db -> select($query);
+        return $result;
+    }
+
+    public function delete_hoadon($hoadon_id)
+    {
+        $query = "DELETE FROM tbl_hoadon WHERE hoadon_id = $hoadon_id";
+        $result = $this -> db -> delete($query);
+        header('Location:?view=admin_hoadon');
+        return $result;
+    }
 }
 ?>

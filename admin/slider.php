@@ -6,7 +6,7 @@
     <section class="admin-content container" style="padding-left: 0; margin-top: 140px;">
         <div class="container-xxl bg-white d-flex p-0 justify-content-between">
             <!-- Sidebar Start -->
-            <div class="sidebar pe-4 px- pb-3 pt-3">
+            <div class="sidebar pe-4 px- pb-3 pt-3" style="max-width: 400px;">
                 <nav class="navbar bg-light navbar-light">
                     <div class="d-flex align-items-center ms-4 mb-4">
                         <div class="position-relative">
@@ -38,10 +38,16 @@
                             <a href="#" class="nav-link dropdown-toggle d-block" data-bs-toggle="dropdown"><i class="bi bi-gift"></i></i>Khuyến mại</a>
                             <div class="dropdown-menu bg-transparent border-0">
                                 <a href="?view=admin_promote_add" class="icon-link icon-link-hover fs-6 dropdown-item">Thêm khuyến mại</a>
-                                <a href="?view=admin_promote_addToProduct" class="icon-link icon-link-hover fs-6 dropdown-item ">Danh khuyến mại cho sản phẩm</a>
+                                <a href="?view=admin_promote_addToProduct" class="icon-link icon-link-hover fs-6 dropdown-item ">Thêm khuyến mại cho sản phẩm</a>
                                 <a href="?view=promote_list" class="icon-link icon-link-hover fs-6 dropdown-item">Danh sách khuyến mại</a>
                             </div>
-                        </div>                        
+                        </div>      
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle d-block" data-bs-toggle="dropdown"><i class="bi bi-bag"></i></i>Đơn hàng</a>
+                            <div class="dropdown-menu bg-transparent border-0">
+                                <a href="?view=admin_hoadon" class="icon-link icon-link-hover fs-6 dropdown-item">Duyệt đơn hàng</a>
+                            </div>
+                        </div>                  
                     </div>
                 </nav>
             </div>
